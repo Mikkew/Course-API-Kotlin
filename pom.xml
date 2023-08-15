@@ -18,6 +18,10 @@
         <java.version>17</java.version>
         <kotlin.version>1.8.22</kotlin.version>
         <serialization.version>1.5.1</serialization.version>
+        <kotlin-logging.version>3.0.5</kotlin-logging.version>
+        <specification-arg-resolver.version>3.1.0</specification-arg-resolver.version>
+        <springdoc-openapi.version>2.2.0</springdoc-openapi.version>
+        <kotlin-maven-noarg.version>1.9.0</kotlin-maven-noarg.version>
     </properties>
 
     <dependencies>
@@ -42,7 +46,7 @@
         <dependency>
             <groupId>io.github.microutils</groupId>
             <artifactId>kotlin-logging-jvm</artifactId>
-            <version>3.0.5</version>
+            <version>${kotlin-logging.version}</version>
         </dependency>
 
         <!--        <dependency>-->
@@ -93,8 +97,14 @@
         <dependency>
             <groupId>net.kaczmarzyk</groupId>
             <artifactId>specification-arg-resolver</artifactId>
-            <version>3.1.0</version>
+            <version>${specification-arg-resolver.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -140,7 +150,7 @@
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-noarg</artifactId>
-                        <version>1.9.0</version>
+                        <version>${kotlin-maven-noarg.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

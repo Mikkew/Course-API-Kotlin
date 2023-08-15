@@ -2,7 +2,15 @@ package com.mms.kotlin.spring.app.controllers
 
 import com.mms.kotlin.spring.app.models.dto.CourseDto
 import com.mms.kotlin.spring.app.models.entities.Course
+import com.mms.kotlin.spring.app.models.error.WrapperError
 import com.mms.kotlin.spring.app.services.ICourseService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.media.ArraySchema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.validation.Valid
 import mu.KLogger
 import mu.KotlinLogging
@@ -45,6 +53,11 @@ class CourseController @Autowired constructor(private var service: ICourseServic
 //        this.service = service
 //    }
 
+    @Operation(summary = "Get a list courses")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Found list of courses", content = [Content(mediaType = "application/json", array = ArraySchema( schema = Schema(implementation = CourseDto::class)))]),
+        ApiResponse(responseCode = "404", description = "Not Found of courses", content = [Content(mediaType = "application/json", schema = Schema(implementation = WrapperError::class))])
+    ])
     @GetMapping(value = ["", "/"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(value = HttpStatus.OK)
     fun getCourses(): ResponseEntity<Any>? {
@@ -60,6 +73,10 @@ class CourseController @Autowired constructor(private var service: ICourseServic
         return ResponseEntity.ok(response);
     }
 
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Found the course", content = [Content(mediaType = "application/json", schema = Schema(implementation = CourseDto::class))]),
+        ApiResponse(responseCode = "404", description = "Invalid id supplied", content = [Content(mediaType = "application/json", schema = Schema(implementation = WrapperError::class))])
+    ])
     @GetMapping(value = ["/{id}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(value = HttpStatus.OK)
     fun getCourse(@PathVariable id: Long): ResponseEntity<Any> {
@@ -67,9 +84,13 @@ class CourseController @Autowired constructor(private var service: ICourseServic
         return ResponseEntity.ok(response);
     }
 
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Found list of courses", content = [Content(mediaType = "application/json", array = ArraySchema( schema = Schema(implementation = CourseDto::class)))]),
+        ApiResponse(responseCode = "404", description = "Not Found of courses", content = [Content(mediaType = "application/json", schema = Schema(implementation = WrapperError::class))])
+    ])
     @GetMapping(value = ["/category/{category}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(value = HttpStatus.OK)
-    fun getCoursesByCategory(@PathVariable category: String): ResponseEntity<Any> {
+    fun getCoursesByCategory(@Parameter(description = "id of course to be searched") @PathVariable category: String): ResponseEntity<Any> {
         var response: List<CourseDto> = service.getCoursesByCategory(category);
         return ResponseEntity.ok(response);
     }
