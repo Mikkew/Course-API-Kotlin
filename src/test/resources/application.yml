@@ -1,0 +1,12 @@
+#logging:
+#  level:
+#    org:
+#      springframework: off
+#      hibernate.SQL: off
+#    root: off
+
+spring:
+  main:
+    banner-mode: off
+
+message: Hello from profile

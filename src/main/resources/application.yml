@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: course-catalog-service
+  jpa:
+    generate-ddl: true
+    show-sql: true
+message: Hello from profile

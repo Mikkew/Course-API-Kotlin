@@ -1,0 +1,2 @@
+INSERT INTO INSTRUCTORS(name, created_at, updated_at,instructor_id) VALUES ('Ancelmo Gutierrez', CURRENT_DATE(), CURRENT_DATE(), default)
+INSERT INTO COURSES(name,category,instructor_id,created_at,updated_at,course_id) VALUES('Algebra', 'Math',(SELECT instructor_id FROM INSTRUCTORS ORDER BY RAND() LIMIT 1), CURRENT_DATE(), CURRENT_DATE(), default)
