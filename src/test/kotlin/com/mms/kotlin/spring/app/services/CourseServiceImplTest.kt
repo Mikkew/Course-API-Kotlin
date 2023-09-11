@@ -9,7 +9,7 @@ import com.mms.kotlin.spring.app.repositories.ICourseRepository
 import com.mms.kotlin.spring.app.repositories.IInstructorRepository
 import com.mms.kotlin.spring.app.services.impl.CourseServiceImpl
 import com.mms.kotlin.spring.app.specifications.CourseSpecification
-import com.mms.kotlin.spring.app.utils.MockitoUtils
+import com.mms.kotlin.spring.app.utils.anyMockito
 import mu.KLogger
 import mu.KotlinLogging
 import org.junit.jupiter.api.Assertions.*
@@ -88,7 +88,7 @@ class CourseServiceImplTest {
 
         `when`(instructorRepository.findById(anyLong())).thenReturn(DataUtils.INSTRUCTOR_ENTITY_001);
 
-        `when`(repository.save(MockitoUtils.any())).thenAnswer(Answer<Any> { invocation: InvocationOnMock -> run {
+        `when`(repository.save(anyMockito())).thenAnswer(Answer<Any> { invocation: InvocationOnMock -> run {
             var c: Course = invocation.getArgument(0) as Course;
             c.id = 4L
             c.createdAt = LocalDateTime.now();
@@ -103,8 +103,8 @@ class CourseServiceImplTest {
         assertEquals(newCourse.category, course.category);
         assertEquals(newCourse.instructorId, course.instructor!!.id);
 
-        verify(repository, atLeastOnce()).save(MockitoUtils.any());
-        verify(instructorRepository).findById(MockitoUtils.any());
+        verify(repository, atLeastOnce()).save(anyMockito());
+        verify(instructorRepository).findById(anyMockito());
     }
 
     @Test
@@ -121,7 +121,7 @@ class CourseServiceImplTest {
         assertEquals(DataUtils.COURSE_ENTITY_001.get().instructor!!.name, course.instructor!!.name);
 
         verify(repository, atLeastOnce()).findById(anyLong());
-        verify(instructorRepository, times(0)).findById(MockitoUtils.any());
+        verify(instructorRepository, times(0)).findById(anyMockito());
     }
 
     @Test
@@ -150,7 +150,7 @@ class CourseServiceImplTest {
         assertEquals(updateCourse.instructorId, DataUtils.INSTRUCTOR_ENTITY_002.get().id);
 
         verify(repository, atLeastOnce()).findById(anyLong());
-        verify(repository, times(0)).save(MockitoUtils.any());
+        verify(repository, times(0)).save(anyMockito());
         verify(instructorRepository, atLeastOnce()).findById(anyLong());
     }
 
@@ -176,7 +176,7 @@ class CourseServiceImplTest {
     fun testGetCourseByName(value: String) {
         val listCourseFiltered: List<Course> = DataUtils.LIST_COURSES_ENTITIES.filter { it.name!!.contains(value) };
 
-        `when`(repository.findAll(MockitoUtils.any<Specification<Course>>())).thenReturn(listCourseFiltered);
+        `when`(repository.findAll(anyMockito<Specification<Course>>())).thenReturn(listCourseFiltered);
 
         val listCourses: List<CourseDto> = service.getCoursesFilters(CourseSpecification.nameContains(anyString()));
         LOGGER.info { "$listCourses" }
@@ -187,7 +187,7 @@ class CourseServiceImplTest {
         assertEquals(listCourseFiltered[0].instructor!!.id, listCourses[0].instructor!!.id);
         assertEquals(listCourseFiltered[0].instructor!!.name, listCourses[0].instructor!!.name);
 
-        verify(repository, atLeastOnce()).findAll(MockitoUtils.any<Specification<Course>>());
+        verify(repository, atLeastOnce()).findAll(anyMockito<Specification<Course>>());
     }
 
     @ParameterizedTest
@@ -219,20 +219,20 @@ class CourseServiceImplTest {
         }
 
         verify(repository, atLeastOnce()).findById(anyLong());
-        verify(instructorRepository, times(0)).findById(MockitoUtils.any());
+        verify(instructorRepository, times(0)).findById(anyMockito());
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["Biology"])
     @Order(value = 9)
     fun testGetCourseByNameThrowException(value: String) {
-        `when`(repository.findAll(MockitoUtils.any<Specification<Course>>())).thenThrow(ResourceNotFoundException::class.java);
+        `when`(repository.findAll(anyMockito<Specification<Course>>())).thenThrow(ResourceNotFoundException::class.java);
 
         assertThrows(ResourceNotFoundException::class.java) {
             val listCourses: List<CourseDto> = service.getCoursesFilters(CourseSpecification.nameContains(value));
         }
 
-        verify(repository, atLeastOnce()).findAll(MockitoUtils.any<Specification<Course>>());
+        verify(repository, atLeastOnce()).findAll(anyMockito<Specification<Course>>());
     }
 
     @ParameterizedTest

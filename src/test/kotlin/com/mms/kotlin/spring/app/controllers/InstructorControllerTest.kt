@@ -6,7 +6,7 @@ import com.mms.kotlin.spring.app.data.DataUtils.Companion.CREATE_INSTRUCTOR_REQU
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.UPDATE_INSTRUCTOR_REQUEST
 import com.mms.kotlin.spring.app.models.dto.InstructorDto
 import com.mms.kotlin.spring.app.services.IInstructorService
-import com.mms.kotlin.spring.app.utils.MockitoUtils
+import com.mms.kotlin.spring.app.utils.anyMockito
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -68,7 +68,7 @@ class InstructorControllerTest {
     @Order(value = 2)
     fun testSaveInstructor() {
 
-        `when`(service.createInstructor(MockitoUtils.any())).thenAnswer(Answer<Any> { invocation: InvocationOnMock -> run {
+        `when`(service.createInstructor(anyMockito())).thenAnswer(Answer<Any> { invocation: InvocationOnMock -> run {
             val i: InstructorDto = invocation.getArgument(0);
             i.id = 4L
             return@Answer i
@@ -81,7 +81,7 @@ class InstructorControllerTest {
             .andExpect(jsonPath("$.id").value(4))
             .andExpect(jsonPath("$.name").value(CREATE_INSTRUCTOR_REQUEST["name"]));
 
-        verify(service, atLeastOnce()).createInstructor(MockitoUtils.any());
+        verify(service, atLeastOnce()).createInstructor(anyMockito());
     }
 
     @Test
@@ -103,7 +103,7 @@ class InstructorControllerTest {
     @Order(value = 4)
     fun testUpdateCourse() {
 
-        `when`(service.updateInstructor(MockitoUtils.any())).thenAnswer(Answer<Any> { invocation: InvocationOnMock -> run {
+        `when`(service.updateInstructor(anyMockito())).thenAnswer(Answer<Any> { invocation: InvocationOnMock -> run {
             val i: InstructorDto = invocation.getArgument(0) as InstructorDto;
             i.name = UPDATE_INSTRUCTOR_REQUEST["name"] as String;
             return@Answer i;
@@ -116,7 +116,7 @@ class InstructorControllerTest {
             .andExpect(jsonPath("$.id").value(UPDATE_INSTRUCTOR_REQUEST["id"]))
             .andExpect(jsonPath("$.name").value(UPDATE_INSTRUCTOR_REQUEST["name"]));
 
-        verify(service, atLeastOnce()).updateInstructor(MockitoUtils.any());
+        verify(service, atLeastOnce()).updateInstructor(anyMockito());
     }
 
     @Test

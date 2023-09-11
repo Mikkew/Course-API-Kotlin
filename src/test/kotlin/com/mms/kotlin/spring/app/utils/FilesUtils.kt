@@ -4,15 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.core.io.ClassPathResource
 import java.io.File
 
-class FilesUtils {
+private var mapper: ObjectMapper = ObjectMapper();
 
-    companion object {
-
-        private var mapper: ObjectMapper = ObjectMapper()
-
-        fun getBodyFile(path: String): Map<*, *> {
-            val resource: File = ClassPathResource(path).file;
-            return mapper.readValue<Map<*, *>?>(resource.inputStream(), Map::class.java);
-        }
-    }
+fun getBodyFile(path: String): Map<*, *> {
+    val resource: File = ClassPathResource(path).file;
+    return mapper.readValue<Map<*, *>?>(resource.inputStream(), Map::class.java);
 }

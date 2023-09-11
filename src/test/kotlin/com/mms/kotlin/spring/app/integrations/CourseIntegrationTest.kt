@@ -2,7 +2,7 @@ package com.mms.kotlin.spring.app.integrations
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils
-import com.mms.kotlin.spring.app.utils.FilesUtils.Companion.getBodyFile
+import com.mms.kotlin.spring.app.utils.getBodyFile
 import com.mms.kotlin.spring.app.models.dto.CourseDto
 import mu.KLogger
 import mu.KotlinLogging

@@ -2,7 +2,7 @@ package com.mms.kotlin.spring.app.integrations
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.INSTRUCTOR_DTO_001
-import com.mms.kotlin.spring.app.utils.FilesUtils.Companion.getBodyFile
+import com.mms.kotlin.spring.app.utils.getBodyFile
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.MethodOrderer

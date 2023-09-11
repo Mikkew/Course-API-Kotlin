@@ -4,7 +4,8 @@ import com.mms.kotlin.spring.app.data.DataUtils
 import com.mms.kotlin.spring.app.models.dto.InstructorDto
 import com.mms.kotlin.spring.app.models.entities.Instructor
 import com.mms.kotlin.spring.app.repositories.IInstructorRepository
-import com.mms.kotlin.spring.app.utils.MockitoUtils
+import com.mms.kotlin.spring.app.utils.anyMockito
+import com.mms.kotlin.spring.app.utils.getBodyFile
 import mu.KLogger
 import mu.KotlinLogging
 import org.junit.jupiter.api.Assertions.*
@@ -59,7 +60,7 @@ class InstructorServiceImplTest {
     fun testCreateInstructor() {
         val instructor: InstructorDto = InstructorDto.Builder().name("Beatriz Hernandez").build();
 
-        `when`(repository.save(MockitoUtils.any<Instructor>())).thenAnswer(Answer<Any> {invocation: InvocationOnMock ->  run {
+        `when`(repository.save(anyMockito<Instructor>())).thenAnswer(Answer<Any> { invocation: InvocationOnMock ->  run {
             val i: Instructor = invocation.getArgument(0) as Instructor;
             i.id=4L;
             i.createdAt = LocalDateTime.now();
@@ -72,7 +73,7 @@ class InstructorServiceImplTest {
         assertEquals(4L, newInstructor.id);
         assertEquals(instructor.name, newInstructor.name);
 
-        verify(repository, atLeastOnce()).save(MockitoUtils.any());
+        verify(repository, atLeastOnce()).save(anyMockito());
     }
 
     @Test

@@ -3,7 +3,7 @@ package com.mms.kotlin.spring.app.controllers
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.UPDATE_COURSE_REQUEST
-import com.mms.kotlin.spring.app.utils.MockitoUtils
+import com.mms.kotlin.spring.app.utils.anyMockito
 import com.mms.kotlin.spring.app.models.dto.CourseDto
 import com.mms.kotlin.spring.app.services.ICourseService
 import org.hamcrest.Matchers.*
@@ -77,7 +77,7 @@ class CourseControllerTest {
     fun testSaveCourse() {
 //        val newCourse: CourseDto = CourseDto.Builder().name("Aritmetic").category("Math").instructorId(1L).build();
 
-        `when`(service.createCourse(MockitoUtils.any())).then(Answer<Any> { invocation: InvocationOnMock ->
+        `when`(service.createCourse(anyMockito())).then(Answer<Any> { invocation: InvocationOnMock ->
             val c: CourseDto = invocation.getArgument(0)
             c.id = 4L
             return@Answer c
@@ -99,7 +99,7 @@ class CourseControllerTest {
 //        val course: CourseDto = DataUtils.COURSE_002.copy();
 //        course.name = "Calculus";
 
-        `when`(service.updateCourse(MockitoUtils.any())).then(Answer<Any> { invocation: InvocationOnMock ->
+        `when`(service.updateCourse(anyMockito())).then(Answer<Any> { invocation: InvocationOnMock ->
             val c: CourseDto = invocation.getArgument(0) as CourseDto
             c.name = UPDATE_COURSE_REQUEST.get("name") as String;
             c.category = c.category
@@ -136,7 +136,7 @@ class CourseControllerTest {
     @MethodSource("provideParameters")
     fun testGetCoursesByName(key: String, value: String) {
         val listCoursesFiltered = DataUtils.LIST_COURSES_DTO.filter { it.name!!.contains(value)};
-        `when`(service.getCoursesFilters(MockitoUtils.any())).thenReturn(listCoursesFiltered);
+        `when`(service.getCoursesFilters(anyMockito())).thenReturn(listCoursesFiltered);
 
         mockMvc.perform(get("/course/filter")
                 .param(key, value))
@@ -150,7 +150,7 @@ class CourseControllerTest {
     @ValueSource(strings = ["Math"])
     fun testGetCoursesByCategory(value: String) {
         val listCoursesFiltered = DataUtils.LIST_COURSES_DTO.filter { it.category!!.contains(value) };
-        `when`(service.getCoursesByCategory(MockitoUtils.any())).thenReturn(listCoursesFiltered);
+        `when`(service.getCoursesByCategory(anyMockito())).thenReturn(listCoursesFiltered);
 
         mockMvc.perform(get("/course/category/${value}"))
             .andExpect(status().isOk)
