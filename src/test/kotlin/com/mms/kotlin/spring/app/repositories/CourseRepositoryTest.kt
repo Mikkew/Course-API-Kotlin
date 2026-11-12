@@ -3,8 +3,8 @@ package com.mms.kotlin.spring.app.repositories
 import com.mms.kotlin.spring.app.models.entities.Course
 import com.mms.kotlin.spring.app.models.entities.Instructor
 import com.mms.kotlin.spring.app.specifications.CourseSpecification
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest
 import java.util.*
 import kotlin.NoSuchElementException
 

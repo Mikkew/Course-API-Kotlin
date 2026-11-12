@@ -3,7 +3,7 @@ package com.mms.kotlin.spring.app.services.impl
 //import io.github.oshai.kotlinlogging.KotlinLogging
 //import com.mms.kotlin.spring.app.utils.LOGGER
 import com.mms.kotlin.spring.app.services.IGreetingService
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 //import io.klogging.NoCoLogger
 //import io.klogging.java.LoggerFactory
 import org.springframework.beans.factory.annotation.Value

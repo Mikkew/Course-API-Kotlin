@@ -5,8 +5,8 @@ import com.mms.kotlin.spring.app.models.dto.InstructorDto
 import com.mms.kotlin.spring.app.models.entities.Instructor
 import com.mms.kotlin.spring.app.repositories.IInstructorRepository
 import com.mms.kotlin.spring.app.services.IInstructorService
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

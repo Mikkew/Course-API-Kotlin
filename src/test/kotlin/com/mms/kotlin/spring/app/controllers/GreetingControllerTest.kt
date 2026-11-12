@@ -1,14 +1,14 @@
 package com.mms.kotlin.spring.app.controllers
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.controllers.GreetingController
 import com.mms.kotlin.spring.app.services.impl.GreetingServiceImpl
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 
 import org.hamcrest.Matchers.*
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 @WebMvcTest(GreetingController::class)
 class GreetingControllerTest {
 
-    @MockBean
+    @MockitoBean
     private lateinit var service: GreetingServiceImpl;
 
     @Autowired

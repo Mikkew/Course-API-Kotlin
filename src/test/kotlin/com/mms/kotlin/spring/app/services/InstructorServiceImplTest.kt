@@ -6,8 +6,8 @@ import com.mms.kotlin.spring.app.models.entities.Instructor
 import com.mms.kotlin.spring.app.repositories.IInstructorRepository
 import com.mms.kotlin.spring.app.utils.anyMockito
 import com.mms.kotlin.spring.app.utils.getBodyFile
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -18,7 +18,7 @@ import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.LocalDateTime
 
 @SpringBootTest
@@ -29,7 +29,7 @@ class InstructorServiceImplTest {
         private val LOGGER: KLogger = KotlinLogging.logger { }
     }
 
-    @MockBean
+    @MockitoBean
     private lateinit var repository: IInstructorRepository;
 
     @Autowired

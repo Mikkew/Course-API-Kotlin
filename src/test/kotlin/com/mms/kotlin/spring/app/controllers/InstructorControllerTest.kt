@@ -1,6 +1,6 @@
 package com.mms.kotlin.spring.app.controllers
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.CREATE_INSTRUCTOR_REQUEST
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.UPDATE_INSTRUCTOR_REQUEST
@@ -18,8 +18,8 @@ import org.mockito.Mockito.*
 import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 @TestMethodOrder(value = OrderAnnotation::class)
 class InstructorControllerTest {
 
-    @MockBean
+    @MockitoBean
     private lateinit var service: IInstructorService;
 
     @Autowired

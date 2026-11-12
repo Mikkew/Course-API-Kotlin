@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
+        <version>4.1.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mms.kotlin.spring.app</groupId>
@@ -16,18 +16,17 @@
 
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.8.22</kotlin.version>
-        <serialization.version>1.5.1</serialization.version>
-        <kotlin-logging.version>3.0.5</kotlin-logging.version>
-        <specification-arg-resolver.version>3.1.0</specification-arg-resolver.version>
-        <springdoc-openapi.version>2.2.0</springdoc-openapi.version>
-        <kotlin-maven-noarg.version>1.9.0</kotlin-maven-noarg.version>
+        <kotlin.version>2.4.21</kotlin.version>
+        <serialization.version>1.13.0</serialization.version>
+        <kotlin-logging.version>8.0.7</kotlin-logging.version>
+        <specification-arg-resolver.version>4.1.0</specification-arg-resolver.version>
+        <springdoc-openapi.version>3.2.0</springdoc-openapi.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,23 +36,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!--		<dependency>-->
-        <!--			<groupId>io.github.oshai</groupId>-->
-        <!--			<artifactId>kotlin-logging-jvm</artifactId>-->
-        <!--			<version>5.0.1</version>-->
-        <!--		</dependency>-->
-
         <dependency>
-            <groupId>io.github.microutils</groupId>
+            <groupId>io.github.oshai</groupId>
             <artifactId>kotlin-logging-jvm</artifactId>
             <version>${kotlin-logging.version}</version>
         </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>io.klogging</groupId>-->
-        <!--            <artifactId>slf4j-klogging</artifactId>-->
-        <!--            <version>0.5.0</version>-->
-        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
@@ -66,9 +53,14 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-webtestclient</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
+            <groupId>tools.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
         <dependency>
@@ -91,7 +83,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -150,7 +147,7 @@
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-noarg</artifactId>
-                        <version>${kotlin-maven-noarg.version}</version>
+                        <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

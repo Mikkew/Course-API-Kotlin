@@ -10,8 +10,8 @@ import com.mms.kotlin.spring.app.repositories.IInstructorRepository
 import com.mms.kotlin.spring.app.services.impl.CourseServiceImpl
 import com.mms.kotlin.spring.app.specifications.CourseSpecification
 import com.mms.kotlin.spring.app.utils.anyMockito
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -25,7 +25,7 @@ import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.data.jpa.domain.Specification
 import java.time.LocalDateTime
 import java.util.Optional
@@ -38,13 +38,13 @@ class CourseServiceImplTest {
         private val LOGGER: KLogger = KotlinLogging.logger { }
     }
 
-    @MockBean
+    @MockitoBean
     private lateinit var repository: ICourseRepository;
 
-//    @MockBean
+//    @MockitoBean
 //    private lateinit var converter: CourseConverter;
 
-    @MockBean
+    @MockitoBean
     private lateinit var instructorRepository: IInstructorRepository;
 
     @Autowired

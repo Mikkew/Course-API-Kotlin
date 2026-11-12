@@ -1,6 +1,6 @@
 package com.mms.kotlin.spring.app.integrations
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.INSTRUCTOR_DTO_001
 import com.mms.kotlin.spring.app.utils.getBodyFile
 import org.hamcrest.Matchers.*
@@ -11,11 +11,15 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.annotation.DirtiesContext
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@AutoConfigureWebTestClient
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation::class)
 class InstructorIntegrationTest {
 
@@ -42,7 +46,7 @@ class InstructorIntegrationTest {
             .expectBody()
             .jsonPath("$[0].id").value<Int>(`is`( INSTRUCTOR_DTO_001.id!!.toInt() ))
             .jsonPath("$[0].name").value<String>(`is`( INSTRUCTOR_DTO_001.name ))
-            .jsonPath("$", hasSize<Any>(2))
+            .jsonPath("$").value(hasSize<Any>(1))
     }
 
     @Test
@@ -86,7 +90,7 @@ class InstructorIntegrationTest {
             .expectStatus().isOk
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
             .expectBody()
-            .jsonPath("$", hasSize<Any>(2));
+            .jsonPath("$").value(hasSize<Any>(2));
 
         client.delete().uri("/instructor/2").exchange()
             .expectStatus().isAccepted
@@ -103,6 +107,6 @@ class InstructorIntegrationTest {
             .expectStatus().isOk
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
             .expectBody()
-            .jsonPath("$", hasSize<Any>(1));
+            .jsonPath("$").value(hasSize<Any>(1));
     }
 }

@@ -3,8 +3,8 @@ package com.mms.kotlin.spring.app.mapper
 import com.mms.kotlin.spring.app.data.DataUtils
 import com.mms.kotlin.spring.app.models.dto.CourseDto
 import com.mms.kotlin.spring.app.models.entities.Course
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

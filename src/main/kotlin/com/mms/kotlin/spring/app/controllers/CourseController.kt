@@ -12,8 +12,8 @@ import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.validation.Valid
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import net.kaczmarzyk.spring.data.jpa.domain.Like
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec
 import org.springframework.beans.factory.annotation.Autowired

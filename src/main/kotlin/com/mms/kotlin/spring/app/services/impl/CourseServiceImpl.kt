@@ -8,8 +8,8 @@ import com.mms.kotlin.spring.app.models.entities.Instructor
 import com.mms.kotlin.spring.app.repositories.ICourseRepository
 import com.mms.kotlin.spring.app.repositories.IInstructorRepository
 import com.mms.kotlin.spring.app.services.ICourseService
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
@@ -88,7 +88,7 @@ class CourseServiceImpl @Autowired constructor (
         val instructorEntity: Instructor = instructorRepository.findById(course.instructorId!!).orElseThrow{ throw ResourceNotFoundException(MESSAGE_RESOURCE_NOT_FOUND_INSTRUCTOR) }
         courseEntity.instructor = instructorEntity
         courseEntity = courseRepository.save(courseEntity);
-        LOGGER.info("Save course is : $courseEntity")
+        LOGGER.info { "Save course is : $courseEntity" }
 
         return  converter.toDto(courseEntity);
     }
