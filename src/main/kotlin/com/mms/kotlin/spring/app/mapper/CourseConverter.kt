@@ -24,9 +24,10 @@ class CourseConverter : AbstractConverter<Course, CourseDto>() {
     }
 
     override fun toEntity(dto: CourseDto): Course = dto.let {
-        Course.Builder().id(it.id!!)
-            .name(it.name!!)
-            .instructor(Instructor.Builder().id(it.instructorId!!).build())
-            .build()
+        val instructor: Instructor? = it.instructor?.let { instructorDto ->
+            Instructor(id = instructorDto.id, name = instructorDto.name, courses = null)
+        } ?: it.instructorId?.let { instructorId -> Instructor.Builder().id(instructorId).build() }
+
+        Course(id = it.id, name = it.name, category = it.category, instructor = instructor)
     }
 }

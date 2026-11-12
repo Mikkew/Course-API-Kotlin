@@ -1,6 +1,6 @@
 package com.mms.kotlin.spring.app.controllers
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils
 import com.mms.kotlin.spring.app.data.DataUtils.Companion.UPDATE_COURSE_REQUEST
 import com.mms.kotlin.spring.app.utils.anyMockito
@@ -17,8 +17,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 
 import org.mockito.Mockito.*
@@ -33,7 +33,7 @@ import java.util.stream.Stream
 @TestMethodOrder(value = OrderAnnotation::class)
 class CourseControllerTest {
 
-    @MockBean
+    @MockitoBean
     private lateinit var service: ICourseService
 
     @Autowired

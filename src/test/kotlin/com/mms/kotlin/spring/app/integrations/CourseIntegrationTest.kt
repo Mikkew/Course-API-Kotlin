@@ -1,11 +1,11 @@
 package com.mms.kotlin.spring.app.integrations
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import com.mms.kotlin.spring.app.data.DataUtils
 import com.mms.kotlin.spring.app.utils.getBodyFile
 import com.mms.kotlin.spring.app.models.dto.CourseDto
-import mu.KLogger
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -19,6 +19,8 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.annotation.DirtiesContext
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -26,6 +28,8 @@ import java.util.stream.Stream
 
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@AutoConfigureWebTestClient
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(value = OrderAnnotation::class)
 class CourseIntegrationTest {
 
@@ -54,7 +58,7 @@ class CourseIntegrationTest {
             .jsonPath("$").isArray()
             .jsonPath("$.size()").isEqualTo(1)
             .jsonPath("$").value( hasSize<Any>(1))
-            .jsonPath("$", hasSize<Any>(1))
+            .jsonPath("$").value(hasSize<Any>(1))
     }
 
     @Test
@@ -128,7 +132,7 @@ class CourseIntegrationTest {
             .expectStatus().isOk
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
             .expectBody()
-            .jsonPath("$", hasSize<Any>(2));
+            .jsonPath("$").value(hasSize<Any>(2));
 
         client.delete().uri{uri -> uri.path("/course").path("/{id}").build(body_put["id"])}.exchange()
             .expectStatus().isAccepted
